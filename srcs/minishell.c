@@ -6,7 +6,7 @@
 /*   By: mdaillet <mdaillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 14:26:20 by mdaillet          #+#    #+#             */
-/*   Updated: 2021/12/01 18:52:30 by mdaillet         ###   ########.fr       */
+/*   Updated: 2021/12/16 14:01:11 by mdaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	ft_loop(t_list *venv)
 
 void	ft_init_all(void)
 {
+	g_ms->history_count = 0;
 	g_ms->sig = -1;
 	g_ms->pid = -1;
 	g_ms->history = ft_listnew(0, 0);
@@ -78,7 +79,5 @@ int main(int ac, char **av, char **env)
 	g_ms->venv = venv;
 	ft_init_all();
 	ft_loop(venv);
-	ft_freelist(&venv);
-	ft_freelist(&g_ms->first);
 	return (g_ms->status);
 }

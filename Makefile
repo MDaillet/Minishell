@@ -6,7 +6,7 @@
 #    By: mdaillet <mdaillet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/04 18:46:20 by mdaillet          #+#    #+#              #
-#    Updated: 2021/11/06 16:49:19 by mdaillet         ###   ########.fr        #
+#    Updated: 2021/12/16 14:08:30 by mdaillet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ LIBFT		=	libft/libft.a
 
 CC			=	gcc
 
-CFLAGS		=	-Werror -Wall -Wextra -g -I $(HEADER) #-fsanitize=address
+CFLAGS		=	-Werror -Wall -Wextra -g -I $(HEADER) -fsanitize=leak
 
 OBJS		=	$(SRCS:.c=.o)
 

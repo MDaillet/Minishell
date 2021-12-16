@@ -6,7 +6,7 @@
 /*   By: mdaillet <mdaillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 13:00:49 by mdaillet          #+#    #+#             */
-/*   Updated: 2021/12/01 12:33:15 by mdaillet         ###   ########.fr       */
+/*   Updated: 2021/12/15 17:32:02 by mdaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_handler(int sig) // Handling signals in the maim process
 	if (sig == SIGINT)
 	{
 		write(1, "\n", 1);
+		ft_free(g_ms->input);
 		ft_read_init(&g_ms->len, &g_ms->pos);
 		ft_prompt();
 		signal(SIGINT, ft_handler);
@@ -42,8 +43,6 @@ void	ft_handler_pip(int sig) // Handling signals in the piping and forking proce
 	if (sig == SIGINT)
 	{
 		kill(g_ms->pid, SIGINT);
-	//	write(1, "Quit : ", 7);
-	//	ft_putnbr_fd(sig, 1);
 		write(1, "\n", 1);
 		signal(SIGINT, ft_handler);
 	}
@@ -57,12 +56,21 @@ void	ft_signal_pip(void) // Receiving signals in the piping and forking process
 
 void	ft_exit_checker(int i) // The CRL-D bash behavior of exiting
 {
+	t_list	*t;
 	if (i == 4)
 	{
 		if (g_ms->input)
 		{
 			if (!*g_ms->input)
 			{
+				g_ms->history_count++;
+				while (g_ms->history_count--)
+				{
+					t = g_ms->first->next;
+					ft_listdelone(&g_ms->first);
+					g_ms->first = t;
+				}
+				ft_freelist(&g_ms->venv);
 				ft_free(g_ms->input);
 				ft_putstr_fd("Exit", 2);
 				exit(0);

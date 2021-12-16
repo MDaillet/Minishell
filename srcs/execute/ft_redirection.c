@@ -6,7 +6,7 @@
 /*   By: mdaillet <mdaillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 17:08:00 by mdaillet          #+#    #+#             */
-/*   Updated: 2021/12/01 11:09:01 by mdaillet         ###   ########.fr       */
+/*   Updated: 2021/12/15 13:35:56 by mdaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ int	ft_redirection2(t_builtin *node) // Reads from the arg in the next node and 
 	ret = open(list->str,  O_RDONLY, S_IRWXU);
 	if (ret < 0)
 	{
-		 ft_error2(list->str, "No such file or directory");
-		 return (ERROR);
+		ft_error2(list->str, "No such file or directory");
+		return (ERROR);
 	}
 	dup2(ret, g_ms->pip[0]);
 	ft_close(ret);
@@ -81,9 +81,10 @@ int	ft_redirection2(t_builtin *node) // Reads from the arg in the next node and 
 
 int ft_redirection3(t_builtin *node, int *fd) // When use << cmd, the terminal will print newlines where you will be able enter arguments as much as you want, until you write the cmd name again called "etiquette". It will write the new arguments in the pipe g_ms->pip
 {
-	t_list *list;
-	char *s;
-
+	t_list	*list;
+	t_list	*tmp;
+	char	*s;
+	tmp = NULL;
 	if (pipe(g_ms->pip) < 0)
 		ft_error("<< Redirection  : pipe error");
 	if (ft_check_redi(node, 2) == ERROR)
@@ -95,10 +96,19 @@ int ft_redirection3(t_builtin *node, int *fd) // When use << cmd, the terminal w
 		{
 			ft_close(g_ms->pip[1]);
 			ft_free(s);
+			node->cmd = node->cmd->next->next;
+			ft_builtin(node, &g_ms->venv);
+			while (node->cmd->pre)
+				node->cmd = node->cmd->pre;
+			ft_delbuilt(&node);
 			return (SUCCESS);
 		}
 		ft_putstr_fd(s, g_ms->pip[1]);
 		ft_putstr_fd("\n", g_ms->pip[1]);
+		tmp = ft_listnew(ft_strdup(" "), ft_strdup(""));
+		ft_listadd_tail(&node->cmd, &tmp);
+		tmp = ft_listnew(ft_strdup(s), ft_strdup(""));
+		ft_listadd_tail(&node->cmd, &tmp);
 		ft_free(s);
 	}
 	return (SUCCESS);

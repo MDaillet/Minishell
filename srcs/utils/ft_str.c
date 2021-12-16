@@ -6,7 +6,7 @@
 /*   By: mdaillet <mdaillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 11:09:35 by mdaillet          #+#    #+#             */
-/*   Updated: 2021/11/09 15:54:40 by mdaillet         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:19:02 by mdaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,27 @@ char	*ft_strchr1(const char *s, char c)
 {
 	while (*s != c)
 	{
+		if (*s == 0)
+			return (0);
+		s++;
+	}
+	return ((char *)s);
+}
+
+char	*ft_strchr2(const char *s, int c)
+{
+	if (c == 0)
+		return (0);
+	if (*s == c)
+		return ((char *)s);
+	while (*s != c)
+	{
+		if (*s == '\'')
+		{
+			s++;
+			while (*s != '\'' && *s)
+				s++;
+		}
 		if (*s == 0)
 			return (0);
 		s++;

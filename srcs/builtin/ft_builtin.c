@@ -6,7 +6,7 @@
 /*   By: mdaillet <mdaillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:58:19 by mdaillet          #+#    #+#             */
-/*   Updated: 2021/12/02 11:54:44 by mdaillet         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:31:22 by mdaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_builtin(t_builtin *node, t_list **venv) // Scan the cmd and call the appr
 	int	ret;
 	
 	ft_replace_venv(node->cmd, *venv);
-	ft_remove_q(node->cmd);
+	ft_remove_q(node->cmd);	
 	if (!node->cmd || !node)
 		return (EXIT_FAILURE);
 	if (ft_strncmp(node->cmd->str, "pwd", 3))

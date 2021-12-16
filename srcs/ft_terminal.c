@@ -6,7 +6,7 @@
 /*   By: mdaillet <mdaillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 15:15:35 by mdaillet          #+#    #+#             */
-/*   Updated: 2021/11/23 15:42:34 by mdaillet         ###   ########.fr       */
+/*   Updated: 2021/12/15 17:18:36 by mdaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_history_add(void) // Save the input line and add it into the history
 	s = ft_strdup2(g_ms->input, ft_strlen(g_ms->input));
 	tmp = ft_listnew(s, 0);
 	ft_listadd_front(&g_ms->first, &tmp);
+	g_ms->history_count++;
 	g_ms->history = tmp;
 }
 

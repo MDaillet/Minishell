@@ -6,7 +6,7 @@
 /*   By: mdaillet <mdaillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 13:03:38 by mdaillet          #+#    #+#             */
-/*   Updated: 2021/12/02 10:49:54 by mdaillet         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:17:35 by mdaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,10 @@ int	ft_replace_venv2(t_list *list, t_list *venv, int *i) // ' inhibit all charac
 	int	oldlen;
 	char *new;
 	
-	ft_skip_quotes(list->str, i);
-	old = ft_strchr(&(list->str[(*i)]), '$');
+	//ft_skip_quotes(list->str, i);
+	old = ft_strchr2(&(list->str[(*i)]), '$');
+	//printf("%s\n", list->str);
+	//printf("%s\n", old);
 	if (old)
 	{
 		oldlen = ft_lenenv(old + 1); // +1 to remove the dollar sign

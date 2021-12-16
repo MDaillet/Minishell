@@ -6,7 +6,7 @@
 /*   By: mdaillet <mdaillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 18:28:31 by mdaillet          #+#    #+#             */
-/*   Updated: 2021/11/08 12:12:55 by mdaillet         ###   ########.fr       */
+/*   Updated: 2021/12/16 14:10:30 by mdaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 t_builtin	*ft_build_and_save2(t_list *list) // Create a node named Builtin and save the list of token in the t_list cmd
 {
 	t_builtin	*rtn;
-
 	if (!list)
 		return (0);
 	if (!ft_malloc(&rtn, sizeof(t_builtin)))
@@ -57,4 +56,17 @@ void	ft_freebuilt(t_builtin **node)
 		ft_free(*node);
 		(*node) = t1;
 	}
+}
+
+void	ft_delbuilt(t_builtin **node)
+{
+	if (node == 0 || (*node) == 0)
+		return ;
+	if ((*node)->next)
+		(*node)->next->pre = (*node)->pre;
+	if ((*node)->pre)
+		(*node)->pre->next = (*node)->next;
+	if ((*node)->cmd)
+		ft_freelist(&(*node)->cmd);
+	(*node) = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: mdaillet <mdaillet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 13:25:06 by mdaillet          #+#    #+#             */
-/*   Updated: 2021/12/02 11:56:04 by mdaillet         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:17:59 by mdaillet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_builtin
 
 typedef struct s_ms
 {
+	int	history_count;
 	int	sig;
 	int	status;
 	int status_prec;
@@ -119,6 +120,7 @@ int				ft_putchr(int c);
 
 // ##################### UTILS #########################
 
+char			*ft_strchr2(const char *s, int c);
 char			*ft_add_one_char(char **str, int pos, char c);
 char			*ft_del_one_char(char **str, int pos);
 char			*ft_strdup2(const char *s, int len);
@@ -137,6 +139,7 @@ void			ft_free(void *s);
 char			**ft_venvtoa(t_list *venv);
 char			**ft_ltoa(t_list *list);
 void			ft_listdelone(t_list **list);
+void			ft_delbuilt(t_builtin **node);
 void			ft_listadd_back(t_list **list, t_list **new);
 int				ft_lstcount(t_list	*list);
 void			ft_freelist(t_list **list);
@@ -148,6 +151,7 @@ int				ft_strncmpms2(const char *c1, const char *c2, size_t n);
 int				ft_strncmpms(const char *c1, const char *c2, int n);
 int				ft_isnum(const char *s);
 char			*ft_strchr1(const char *s, char c);
+void			ft_freehistory(t_list **list);
 
 // ################### READ and Parse #####################
 
