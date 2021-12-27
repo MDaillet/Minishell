@@ -12,3 +12,4 @@ The list of builtin commands :
 I display the prompt and manage the history with the termcaps library.
 I used linked chain to manage command and their arguments.
 
+![minishell](https://user-images.githubusercontent.com/55747965/147490501-ad368cbe-4c59-4d49-879d-154099db0cb5.gif)
